@@ -278,11 +278,12 @@ function hap(k){
   try{
     const tg=TG(),h=tg&&tg.HapticFeedback;
     if(h&&tg.initData!==undefined&&tg.platform&&tg.platform!=='unknown'){
-      if(k==='sel')h.selectionChanged();
-      else if(k==='ok')h.notificationOccurred('success');
+      // каждый тип отклика на ступень сильнее стандартного
+      const up={sel:'medium',soft:'medium',light:'medium',medium:'heavy',rigid:'heavy',heavy:'heavy'};
+      if(k==='ok')h.notificationOccurred('success');
       else if(k==='warn')h.notificationOccurred('warning');
-      else h.impactOccurred(k);
-    }else if(navigator.vibrate){navigator.vibrate(k==='sel'||k==='soft'?8:k==='heavy'?[40,60,40]:20);}
+      else h.impactOccurred(up[k]||'medium');
+    }else if(navigator.vibrate){navigator.vibrate(k==='heavy'?[60,60,60]:k==='medium'?35:20);}
   }catch(e){}
 }
 let AC=null;
