@@ -11,7 +11,7 @@
   --bg:#07060a; --card:rgba(255,255,255,.06); --card2:rgba(255,255,255,.1);
   --line:rgba(255,255,255,.08); --txt:#fff; --mut:rgba(255,255,255,.55);
   --acc:#c9344c; --acc2:#e0506a; --gold:#f2c14e;
-  --sab:env(safe-area-inset-bottom,0px);
+  --st:0px; --sab:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
 html,body{height:100%}
@@ -30,7 +30,7 @@ body::before{
 button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 input{font:inherit;color:inherit}
 .screen{position:fixed;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
-  padding:18px 16px calc(132px + var(--sab));display:none}
+  padding:calc(18px + var(--st)) 16px calc(132px + var(--sab));display:none}
 .screen.on{display:block;animation:fade .22s ease}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .head{display:flex;align-items:center;justify-content:space-between;margin:6px 4px 18px}
@@ -142,9 +142,9 @@ nav button.on svg{opacity:1;width:28px;height:28px}
 .tg::after{content:"";position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:#fff;transition:transform .2s}
 .tg.on{background:var(--acc)}
 .tg.on::after{transform:translateX(22px)}
-#toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-80px);z-index:20;background:#fff;color:#111;font-weight:800;
-  padding:11px 18px;border-radius:999px;font-size:14px;transition:transform .3s cubic-bezier(.2,.9,.3,1);white-space:nowrap}
-#toast.on{transform:translate(-50%,0)}
+#toast{position:fixed;left:50%;top:calc(18px + var(--st));transform:translate(-50%,calc(-120px - var(--st)));opacity:0;z-index:20;background:#fff;color:#111;font-weight:800;
+  padding:11px 18px;border-radius:999px;font-size:14px;transition:transform .3s cubic-bezier(.2,.9,.3,1),opacity .2s;white-space:nowrap}
+#toast.on{transform:translate(-50%,0);opacity:1}
 </style>
 </head>
 <body>
@@ -261,6 +261,17 @@ window.tgBoot=function(){
   try{tg.setBottomBarColor&&tg.setBottomBarColor('#050407');}catch(e){}
   try{tg.disableVerticalSwipes&&tg.disableVerticalSwipes();}catch(e){}
   try{tg.enableClosingConfirmation&&tg.enableClosingConfirmation();}catch(e){}
+  const mobile=['ios','android','android_x'].includes(tg.platform);
+  try{if(mobile&&tg.isVersionAtLeast&&tg.isVersionAtLeast('8.0')&&!tg.isFullscreen)tg.requestFullscreen();}catch(e){}
+  try{if(tg.lockOrientation&&mobile)tg.lockOrientation();}catch(e){}
+  const ins=()=>{
+    const a=tg.safeAreaInset||{},c=tg.contentSafeAreaInset||{},r=document.documentElement.style;
+    const top=tg.isFullscreen?((a.top||0)+(c.top||0)):0;
+    r.setProperty('--st',top+'px');
+    if(a.bottom)r.setProperty('--sab',a.bottom+'px');
+  };
+  ins();
+  try{['safeAreaChanged','contentSafeAreaChanged','fullscreenChanged','viewportChanged'].forEach(e=>tg.onEvent(e,ins));}catch(e){}
 };
 function hap(k){
   k=k||'sel';
