@@ -56,13 +56,13 @@ h1{font-size:30px;font-weight:900;letter-spacing:-.5px}
 .ring-fg{fill:none;stroke:url(#rg);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .3s linear;
   filter:drop-shadow(0 0 10px rgba(224,80,106,.7))}
 .ringin{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-#time{font-size:clamp(52px,17vw,70px);font-weight:900;letter-spacing:-2px;font-variant-numeric:tabular-nums;line-height:1}
-.warn #time{color:var(--acc2)}
-.paused #time{opacity:.55}
-#state{margin-top:8px;color:var(--mut);font-size:13px;font-weight:600;letter-spacing:.6px;text-transform:uppercase}
+#time,.ctime{font-size:clamp(52px,17vw,70px);font-weight:900;letter-spacing:-2px;font-variant-numeric:tabular-nums;line-height:1}
+.warn #time,.warn .ctime{color:var(--acc2)}
+.paused #time,.paused .ctime{opacity:.55}
+#state,#c-state{margin-top:8px;color:var(--mut);font-size:13px;font-weight:600;letter-spacing:.6px;text-transform:uppercase}
 .blinds{text-align:center}
 .blinds .lbl{letter-spacing:1.5px;text-transform:uppercase;font-size:12px}
-#blinds{font-size:clamp(34px,11vw,46px);font-weight:900;letter-spacing:-1px;font-variant-numeric:tabular-nums;margin-top:2px}
+#blinds,#c-blinds{font-size:clamp(34px,11vw,46px);font-weight:900;letter-spacing:-1px;font-variant-numeric:tabular-nums;margin-top:2px}
 .ctrl{display:flex;align-items:center;justify-content:center;gap:22px;margin:18px 0 20px}
 .play{width:78px;height:78px;border-radius:50%;background:linear-gradient(135deg,var(--acc2),var(--acc));
   display:grid;place-items:center;box-shadow:0 10px 34px rgba(201,52,76,.55);transition:transform .12s}
@@ -114,6 +114,7 @@ h2{font-size:18px;font-weight:800;margin:22px 6px 10px}
 /* nav */
 nav{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:space-around;align-items:flex-end;
   padding:26px 18px calc(12px + var(--sab));background:linear-gradient(to top,#050407 55%,transparent)}
+nav em{font-style:normal}
 nav button{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--mut);font-weight:700;font-size:12px;width:92px}
 nav i{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;
   transition:all .25s cubic-bezier(.3,1.4,.5,1)}
@@ -142,6 +143,29 @@ nav button.on svg{opacity:1;width:28px;height:28px}
 .tg::after{content:"";position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:#fff;transition:transform .2s}
 .tg.on{background:var(--acc)}
 .tg.on::after{transform:translateX(22px)}
+.title{display:flex;align-items:center;gap:8px;font-size:30px;font-weight:900;letter-spacing:-.5px}
+.title svg{width:20px;height:20px;opacity:.6;margin-top:4px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:18px;background:rgba(255,255,255,.07);margin-bottom:18px}
+.seg button{padding:12px;border-radius:14px;font-weight:800;color:var(--mut);transition:all .2s}
+.seg button.on{background:linear-gradient(135deg,var(--acc2),var(--acc));color:#fff;box-shadow:0 6px 18px rgba(201,52,76,.4)}
+.mode{display:flex;align-items:center;gap:14px;padding:16px;border-radius:22px;background:rgba(255,255,255,.06);margin-bottom:10px;width:100%;text-align:left;transition:transform .12s}
+.mode:active{transform:scale(.97)}
+.mode.on{background:linear-gradient(135deg,rgba(224,80,106,.35),rgba(201,52,76,.18));box-shadow:inset 0 0 0 1px rgba(224,80,106,.6)}
+.mode .ic{font-size:26px;width:46px;height:46px;border-radius:15px;background:rgba(255,255,255,.08);display:grid;place-items:center;flex:none}
+.mode b{display:block;font-size:17px;font-weight:800}
+.mode span{color:var(--mut);font-size:13px;font-weight:600}
+.cin{width:96px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.07);
+  font-size:16px;font-weight:800;text-align:right;outline:none;flex:none;user-select:text;-webkit-user-select:text;font-variant-numeric:tabular-nums}
+.cin:focus{border-color:var(--acc2)}
+.pos{color:#3ddc84}.neg{color:#ff7b8f}
+.res{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+.sumrow{display:flex;justify-content:space-between;align-items:center;padding:9px 2px;font-weight:700}
+.sumrow + .sumrow{border-top:1px solid var(--line)}
+.sumrow span{color:var(--mut);font-weight:600}
+.okline{margin-top:10px;padding:12px 14px;border-radius:16px;font-weight:800;font-size:14px;text-align:center}
+.okline.good{background:rgba(61,220,132,.14);color:#3ddc84}
+.okline.bad{background:rgba(255,123,143,.14);color:#ff7b8f}
+.okline.wait{background:rgba(255,255,255,.06);color:var(--mut)}
 #toast{position:fixed;left:50%;top:calc(18px + var(--st));transform:translate(-50%,calc(-120px - var(--st)));opacity:0;z-index:20;background:#fff;color:#111;font-weight:800;
   padding:11px 18px;border-radius:999px;font-size:14px;transition:transform .3s cubic-bezier(.2,.9,.3,1),opacity .2s;white-space:nowrap}
 #toast.on{transform:translate(-50%,0);opacity:1}
@@ -151,7 +175,7 @@ nav button.on svg{opacity:1;width:28px;height:28px}
 
 <!-- ТАЙМЕР -->
 <section class="screen on" id="s-timer">
-  <div class="head"><h1>Турнир</h1><div class="pill" id="lvl">Уровень 1</div></div>
+  <div class="head"><button class="title" data-act="pickmode">Турнир<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="pill" id="lvl">Уровень 1</div></div>
   <div class="ringwrap" id="ringwrap">
     <svg viewBox="0 0 260 260">
       <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8097"/><stop offset="1" stop-color="#c9344c"/></linearGradient></defs>
@@ -201,9 +225,58 @@ nav button.on svg{opacity:1;width:28px;height:28px}
   <div class="card list" id="plist"></div>
 </section>
 
+<!-- КЭШ: ИГРА -->
+<section class="screen" id="c-timer">
+  <div class="head"><button class="title" data-act="pickmode">Кэш<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="pill" id="c-pill">Сессия</div></div>
+  <div class="ringwrap" id="c-ringwrap">
+    <svg viewBox="0 0 260 260">
+      <defs><linearGradient id="crg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8097"/><stop offset="1" stop-color="#c9344c"/></linearGradient></defs>
+      <circle class="ring-bg" cx="130" cy="130" r="120"/>
+      <circle class="ring-fg" id="c-ring" style="stroke:url(#crg)" cx="130" cy="130" r="120" stroke-dasharray="754" stroke-dashoffset="0"/>
+    </svg>
+    <div class="ringin"><div id="c-time" class="ctime">00:00</div><div id="c-state">Не начата</div></div>
+  </div>
+  <div class="blinds"><div class="lbl">Блайнды</div><div id="c-blinds">5 / 10</div></div>
+  <div class="ctrl">
+    <button class="round" data-act="csettings" aria-label="Настройки"><svg viewBox="0 0 24 24" fill="#fff"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.6 7.6 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.5 7.5 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.6 7.6 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg></button>
+    <button class="play" data-act="ctoggle" aria-label="Старт/пауза"><svg id="c-playico" viewBox="0 0 24 24" fill="#fff"><path d="M7 4v16l14-8z"/></svg></button>
+    <button class="round" data-act="addplayer" aria-label="Добавить игрока"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="lbl">Игроки</div><div class="val" id="c-pl">0 / 0</div></div>
+    <div class="card"><div class="lbl">Докупок</div><div class="val" id="c-re">0</div></div>
+    <div class="card"><div class="lbl">Фишек в игре</div><div class="val" id="c-chips">0</div></div>
+    <div class="card"><div class="lbl">Банк</div><div class="val" id="c-bank">0 ₽</div></div>
+    <div class="card"><div class="lbl" id="c-avglbl">Средний стек</div><div class="val" id="c-avg">—</div></div>
+    <div class="card"><div class="lbl">Прошло</div><div class="val" id="c-el">0:00</div></div>
+  </div>
+</section>
+
+<!-- КЭШ: РАСЧЁТ -->
+<section class="screen" id="c-struct">
+  <div class="head"><h1>Расчёт</h1>
+    <button class="round" data-act="csettings" aria-label="Настройки"><svg viewBox="0 0 24 24" fill="#fff"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.6 7.6 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.5 7.5 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.6 7.6 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg></button>
+  </div>
+  <div class="grid" id="c-cfgcards"></div>
+  <div class="card" id="c-sum" style="margin-top:12px"></div>
+  <h2>Фишки на конец игры</h2>
+  <div class="card list" id="c-calc"></div>
+  <p class="note">Введите, сколько фишек у каждого игрока в конце игры. Приложение пересчитает фишки в рубли и покажет, кто сколько выиграл. Банк выплачивает каждому сумму из колонки «Получает».</p>
+</section>
+
+<!-- КЭШ: ИГРОКИ -->
+<section class="screen" id="c-players">
+  <div class="head"><h1>Игроки</h1>
+    <button class="round" data-act="addplayer" aria-label="Добавить"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+  </div>
+  <div class="card"><div class="lbl">Банк (внесено)</div><div class="bank" id="c-bank2">0 ₽</div><div id="c-bankinfo"></div></div>
+  <h2 id="c-plh">За столом</h2>
+  <div class="card list" id="c-plist"></div>
+</section>
+
 <nav>
   <button data-tab="timer" class="on"><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/></svg></i>Таймер</button>
-  <button data-tab="struct"><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M5 19V11M12 19V5M19 19v-6"/></svg></i>Структура</button>
+  <button data-tab="struct"><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M5 19V11M12 19V5M19 19v-6"/></svg></i><em id="nav2">Структура</em></button>
   <button data-tab="players"><i><svg viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6z"/></svg></i>Игроки</button>
 </nav>
 
@@ -224,12 +297,20 @@ function defaults(){
             mk(300,600),mk(400,800),mk(500,1000),mk(600,1200),mk(800,1600),mk(1000,2000),brk(),
             mk(1500,3000),mk(2000,4000),mk(3000,6000),mk(4000,8000)],
     players:[],
-    t:{idx:0,remain:15*60000,running:false,endAt:0}
+    t:{idx:0,remain:15*60000,running:false,endAt:0},
+    mode:'tour',
+    cash:cashDefaults()
   };
+}
+function cashDefaults(){
+  return {cfg:{sb:5,bb:10,buyin:1000,chips:1000,maxRe:3,minutes:240},players:[],t:{acc:0,running:false,since:0,w15:false,wEnd:false}};
 }
 function load(){
   try{const s=JSON.parse(localStorage.getItem(KEY));
-    if(s&&Array.isArray(s.levels)&&s.levels.length&&s.t&&s.cfg&&Array.isArray(s.players))return s;}catch(e){}
+    if(s&&Array.isArray(s.levels)&&s.levels.length&&s.t&&s.cfg&&Array.isArray(s.players)){
+      if(s.mode!=='cash')s.mode='tour';
+      if(!s.cash||!s.cash.cfg||!Array.isArray(s.cash.players)||!s.cash.t)s.cash=cashDefaults();
+      return s;}}catch(e){}
   return defaults();
 }
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
@@ -298,8 +379,9 @@ function beep(freq,d,when,vol){
 const chime=()=>{beep(660,.22,0);beep(880,.22,.22);beep(1175,.45,.44);};
 let wl=null;
 async function wake(){
-  try{if(S.t.running&&navigator.wakeLock&&document.visibilityState==='visible'){wl=await navigator.wakeLock.request('screen');}
-      else if(!S.t.running&&wl){await wl.release();wl=null;}}catch(e){}
+  const run=S.t.running||S.cash.t.running;
+  try{if(run&&!wl&&navigator.wakeLock&&document.visibilityState==='visible'){wl=await navigator.wakeLock.request('screen');wl.addEventListener&&wl.addEventListener('release',()=>{wl=null;});}
+      else if(!run&&wl){await wl.release();wl=null;}}catch(e){}
 }
 function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),1800);}
 
@@ -326,6 +408,7 @@ function tick(){
     }
   }
   renderTimer();
+  ctick();
 }
 function toggle(){
   const T=S.t;audio();
@@ -426,7 +509,7 @@ function renderPlayers(){
       '<div class="pinfo"><b>'+esc(p.name)+'</b><span>'+(p.out?pm[p.id]+' место · ':'')+'реентри '+re+' / '+S.cfg.maxRe+'</span></div>'+right+'</div>';
   }).join(''):'<div class="empty">Пока никого нет.<br>Нажмите «+», чтобы добавить игроков.</div>';
 }
-function renderAll(){renderTimer();renderStats();renderStruct();renderPlayers();}
+function renderAll(){renderTimer();renderStats();renderStruct();renderPlayers();renderCash();showTab();}
 
 /* ---------- шторка ---------- */
 function openSheet(html){$('sheet').innerHTML='<div class="grab"></div>'+html;document.body.classList.add('open');hap('soft');}
@@ -443,7 +526,9 @@ const A={
   },
   saveplayer(){
     const f=$('f-name'),name=f.value.trim();if(!name){hap('warn');return;}
-    S.players.push({id:'p'+Date.now()+Math.floor(Math.random()*1000),name,entries:1,out:false,outAt:0});
+    const id='p'+Date.now()+Math.floor(Math.random()*1000);
+    if(S.mode==='cash')S.cash.players.push({id,name,buyins:1,left:false,cashout:null});
+    else S.players.push({id,name,entries:1,out:false,outAt:0});
     f.value='';f.focus();hap('ok');toast(name+' в игре');save();renderAll();
   },
   bust(el){const p=find(el.dataset.id);if(!p)return;p.out=true;p.outAt=Date.now();hap('medium');save();renderAll();closeSheet();
@@ -500,7 +585,7 @@ const A={
   addbreak(){S.levels.push(brk(10));hap('ok');save();renderAll();const s=$('s-struct');s.scrollTop=s.scrollHeight;},
   settings(){
     const c=S.cfg,first=S.levels.find(l=>l.type==='level');
-    openSheet('<h3>Настройки</h3>'+
+    openSheet('<h3>Настройки</h3>'+modeSeg()+
       '<div class="cols"><div class="fld"><label>Бай-ин, ₽</label><input id="f-buyin" inputmode="numeric" value="'+c.buyin+'"></div>'+
       '<div class="fld"><label>Стартовый стек</label><input id="f-stack" inputmode="numeric" value="'+c.stack+'"></div></div>'+
       '<div class="cols"><div class="fld"><label>Макс. реентри</label><input id="f-maxre" inputmode="numeric" value="'+c.maxRe+'"></div>'+
@@ -532,15 +617,237 @@ const A={
   }
 };
 
+
+/* ---------- КЭШ-ИГРА ---------- */
+const C=()=>S.cash;
+const cfind=id=>C().players.find(p=>p.id===id);
+const rate=()=>C().cfg.chips/C().cfg.buyin;               // фишек за 1 ₽
+const cBuyins=()=>C().players.reduce((a,p)=>a+p.buyins,0);
+const cChips=()=>cBuyins()*C().cfg.chips;
+const cBank=()=>cBuyins()*C().cfg.buyin;
+const cActive=()=>C().players.filter(p=>!p.left);
+const cElapsed=()=>{const t=C().t;return t.acc+(t.running?Date.now()-t.since:0);};
+const cDur=()=>C().cfg.minutes*60000;
+const rub=v=>(v<0?'−':v>0?'+':'')+n(Math.abs(v))+' ₽';
+function hm(ms){const m=Math.floor(ms/60000);return Math.floor(m/60)+':'+String(m%60).padStart(2,'0');}
+
+function ctick(){
+  const t=C().t;if(!t.running)return renderCashTimer();
+  const d=cDur();
+  if(d>0){
+    const rem=d-cElapsed();
+    if(rem<=15*60000&&!t.w15&&rem>0){t.w15=true;save();hap('warn');chime();toast('15 минут до конца игры');}
+    if(rem<=0&&!t.wEnd){t.wEnd=true;t.w15=true;save();hap('heavy');chime();toast('Время вышло: последний круг');}
+  }
+  renderCashTimer();
+}
+function renderCashTimer(){
+  const t=C().t,d=cDur(),el=cElapsed();
+  let txt,frac,state;
+  if(d>0){const rem=d-el;txt=rem>=0?fmt(rem):'+'+fmt(-rem);frac=Math.max(0,Math.min(1,rem/d));
+    state=!t.running?(el===0?'Не начата':'Пауза'):rem<=0?'Последний круг':rem<=15*60000?'Скоро конец':'Идёт игра';}
+  else{txt=fmt(el);frac=1;state=t.running?'Идёт игра':(el===0?'Не начата':'Пауза');}
+  $('c-time').textContent=txt;
+  $('c-ring').style.strokeDashoffset=754*(1-frac);
+  const rw=$('c-ringwrap');rw.classList.toggle('paused',!t.running);rw.classList.toggle('warn',t.running&&d>0&&d-el<=15*60000);
+  $('c-state').textContent=state;
+  $('c-el').textContent=hm(el);
+  $('c-pill').textContent=d>0?'Игра '+hm(d):'Без лимита';
+  $('c-playico').innerHTML=t.running?'<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>':'<path d="M7 4v16l14-8z"/>';
+}
+function ctoggle(){
+  const t=C().t;audio();
+  if(t.running){t.acc+=Date.now()-t.since;t.running=false;}
+  else{t.since=Date.now();t.running=true;}
+  hap('medium');save();wake();renderCash();
+}
+function renderCash(){
+  const c=C().cfg,P=C().players,act=cActive();
+  renderCashTimer();
+  $('c-blinds').textContent=n(c.sb)+' / '+n(c.bb);
+  $('c-pl').textContent=act.length+' / '+P.length;
+  $('c-re').textContent=Math.max(0,cBuyins()-P.length);
+  $('c-chips').textContent=n(cChips());
+  $('c-bank').textContent=n(cBank())+' ₽';
+  // фишки на столе: всё, кроме того, что унесли ушедшие игроки
+  const gone=P.filter(p=>p.left&&p.cashout!=null).reduce((a,p)=>a+p.cashout,0);
+  const avg=act.length?(cChips()-gone)/act.length:0;
+  $('c-avg').textContent=act.length?n(avg):'—';
+  $('c-avglbl').textContent=act.length&&c.bb?'Ср. стек · '+Math.round(avg/c.bb)+' BB':'Средний стек';
+
+  // карточки правил
+  $('c-cfgcards').innerHTML=
+    '<div class="card"><div class="lbl">Блайнды</div><div class="val">'+n(c.sb)+' / '+n(c.bb)+'</div></div>'+
+    '<div class="card"><div class="lbl">Бай-ин</div><div class="val">'+n(c.buyin)+' ₽</div></div>'+
+    '<div class="card"><div class="lbl">Фишек за бай-ин</div><div class="val">'+n(c.chips)+'</div></div>'+
+    '<div class="card"><div class="lbl">Докупки</div><div class="val">до '+c.maxRe+' раз</div></div>';
+
+  renderCashCalc();
+
+  // игроки
+  $('c-bank2').textContent=n(cBank())+' ₽';
+  $('c-bankinfo').innerHTML=
+    '<div class="sumrow"><span>Фишек в игре</span><b>'+n(cChips())+'</b></div>'+
+    '<div class="sumrow"><span>Входов всего</span><b>'+cBuyins()+'</b></div>'+
+    '<div class="sumrow"><span>Из них докупок</span><b>'+Math.max(0,cBuyins()-P.length)+'</b></div>';
+  $('c-plh').textContent='За столом: '+act.length+' из '+P.length;
+  const list=P.map((p,i)=>({p,i})).sort((a,b)=>(a.p.left-b.p.left)||(a.i-b.i));
+  $('c-plist').innerHTML=list.length?list.map(({p,i})=>{
+    const re=p.buyins-1,can=!p.left&&re<c.maxRe;
+    const right=p.left?'<span class="chip">Ушёл</span>':
+      can?'<button class="chip acc" data-act="crebuy" data-id="'+p.id+'">+ Докуп</button>':'<span class="chip">Лимит</span>';
+    return '<div class="prow'+(p.left?' out':'')+'" data-act="cplayer" data-id="'+p.id+'">'+
+      '<div class="ava" style="background:linear-gradient(135deg,'+GR[i%GR.length]+')">'+esc((p.name[0]||'?').toUpperCase())+'</div>'+
+      '<div class="pinfo"><b>'+esc(p.name)+'</b><span>внёс '+n(p.buyins*c.buyin)+' ₽ · докуп '+re+'/'+c.maxRe+'</span></div>'+right+'</div>';
+  }).join(''):'<div class="empty">Пока никого нет.<br>Нажмите «+», чтобы добавить игроков.'+
+    (S.players.length?'<br><br><button class="btn" data-act="cimport">Взять игроков из турнира ('+S.players.length+')</button>':'')+'</div>';
+}
+function cResult(p){
+  if(p.cashout==null||p.cashout==='')return null;
+  const get=p.cashout/rate(),paid=p.buyins*C().cfg.buyin;
+  return {get,diff:get-paid};
+}
+function renderCashCalc(){
+  const P=C().players;
+  // не перерисовываем поля ввода, пока пользователь печатает
+  const focused=document.activeElement&&document.activeElement.classList.contains('cin');
+  if(!focused){
+    $('c-calc').innerHTML=P.length?P.map((p,i)=>{
+      return '<div class="prow" style="cursor:default">'+
+        '<div class="ava" style="background:linear-gradient(135deg,'+GR[i%GR.length]+')">'+esc((p.name[0]||'?').toUpperCase())+'</div>'+
+        '<div class="pinfo"><b>'+esc(p.name)+'</b><span id="cr-'+p.id+'"></span></div>'+
+        '<input class="cin" inputmode="numeric" placeholder="фишки" data-cid="'+p.id+'" value="'+(p.cashout==null?'':p.cashout)+'">'+
+        '</div>';
+    }).join(''):'<div class="empty">Добавьте игроков на вкладке «Игроки».</div>';
+  }
+  P.forEach(p=>{
+    const el=$('cr-'+p.id);if(!el)return;const r=cResult(p);
+    el.innerHTML=r?'получает '+n(r.get)+' ₽ · <b class="res '+(r.diff>0?'pos':r.diff<0?'neg':'')+'">'+rub(Math.round(r.diff))+'</b>'
+                  :'внёс '+n(p.buyins*C().cfg.buyin)+' ₽';
+  });
+  const total=cChips(),entered=P.filter(p=>p.cashout!=null).reduce((a,p)=>a+p.cashout,0);
+  const all=P.length&&P.every(p=>p.cashout!=null),diff=entered-total;
+  const payout=entered/rate();
+  let line;
+  if(!P.length)line='<div class="okline wait">Нет игроков</div>';
+  else if(!all)line='<div class="okline wait">Введено '+P.filter(p=>p.cashout!=null).length+' из '+P.length+' игроков</div>';
+  else if(diff===0)line='<div class="okline good">✓ Всё сходится</div>';
+  else line='<div class="okline bad">'+(diff<0?'Не хватает ':'Лишние ')+n(Math.abs(diff))+' фишек ('+n(Math.abs(diff)/rate())+' ₽)</div>';
+  $('c-sum').innerHTML=
+    '<div class="sumrow"><span>Внесено в банк</span><b>'+n(cBank())+' ₽</b></div>'+
+    '<div class="sumrow"><span>Фишек в игре</span><b>'+n(total)+'</b></div>'+
+    '<div class="sumrow"><span>Посчитано фишек</span><b>'+n(entered)+'</b></div>'+
+    '<div class="sumrow"><span>К выплате</span><b>'+n(payout)+' ₽</b></div>'+line;
+}
+document.addEventListener('input',e=>{
+  const inp=e.target.closest('.cin');if(!inp)return;
+  const p=cfind(inp.dataset.cid);if(!p)return;
+  const v=inp.value.replace(/[^\d]/g,'');if(v!==inp.value)inp.value=v;
+  p.cashout=v===''?null:parseInt(v,10);save();renderCashCalc();
+});
+document.addEventListener('focusout',e=>{if(e.target.classList&&e.target.classList.contains('cin'))setTimeout(()=>{if(!(document.activeElement&&document.activeElement.classList.contains('cin')))renderCash();},0);});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList&&e.target.classList.contains('cin'))e.target.blur();});
+
+/* ---------- переключение режимов и вкладок ---------- */
+let curTab='timer';
+function showTab(){
+  const pre=S.mode==='cash'?'c-':'s-';
+  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===pre+curTab));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===curTab));
+  $('nav2').textContent=S.mode==='cash'?'Расчёт':'Структура';
+}
+function modeSeg(){
+  return '<div class="seg"><button class="'+(S.mode==='tour'?'on':'')+'" data-act="setmode" data-m="tour">Турнир</button>'+
+         '<button class="'+(S.mode==='cash'?'on':'')+'" data-act="setmode" data-m="cash">Кэш</button></div>';
+}
+Object.assign(A,{
+  ctoggle,
+  pickmode(){
+    openSheet('<h3>Формат игры</h3>'+
+      '<button class="mode'+(S.mode==='tour'?' on':'')+'" data-act="setmode" data-m="tour"><div class="ic">🏆</div><div><b>Турнир</b><span>Растущие блайнды, реентри, призовые места</span></div></button>'+
+      '<button class="mode'+(S.mode==='cash'?' on':'')+'" data-act="setmode" data-m="cash"><div class="ic">💵</div><div><b>Кэш</b><span>Фиксированные блайнды, докупки, расчёт фишек в рубли</span></div></button>'+
+      '<p class="note" style="margin-top:6px">Данные турнира и кэша хранятся отдельно, переключение ничего не сбрасывает.</p>');
+  },
+  setmode(el){
+    const m=el.dataset.m;if(m===S.mode){closeSheet();return;}
+    S.mode=m;save();hap('medium');closeSheet();renderAll();
+    document.querySelectorAll('.screen').forEach(s=>s.scrollTop=0);
+    toast(m==='cash'?'Режим: кэш-игра':'Режим: турнир');
+  },
+  csettings(){
+    const c=C().cfg;
+    openSheet('<h3>Настройки кэша</h3>'+modeSeg()+
+      '<div class="cols"><div class="fld"><label>Малый блайнд</label><input id="f-csb" inputmode="numeric" value="'+c.sb+'"></div>'+
+      '<div class="fld"><label>Большой блайнд</label><input id="f-cbb" inputmode="numeric" value="'+c.bb+'"></div></div>'+
+      '<div class="cols"><div class="fld"><label>Бай-ин, ₽</label><input id="f-cbuy" inputmode="numeric" value="'+c.buyin+'"></div>'+
+      '<div class="fld"><label>Фишек за бай-ин</label><input id="f-cchips" inputmode="numeric" value="'+c.chips+'"></div></div>'+
+      '<div class="cols"><div class="fld"><label>Макс. докупок</label><input id="f-cre" inputmode="numeric" value="'+c.maxRe+'"></div>'+
+      '<div class="fld"><label>Длительность, мин</label><input id="f-cmin" inputmode="numeric" value="'+c.minutes+'"></div></div>'+
+      '<p class="note" style="margin:-4px 4px 14px">Длительность 0 — игра без ограничения по времени, таймер просто считает, сколько прошло.</p>'+
+      '<div class="sw"><span>Звуковой сигнал</span><button class="tg'+(S.cfg.sound?' on':'')+'" id="f-sound" data-act="sound"></button></div>'+
+      '<button class="btn pri" data-act="csave">Сохранить</button>'+
+      '<button class="btn" data-act="creset">Сбросить таймер сессии</button>'+
+      '<button class="btn dng" data-act="cresetall">Новая игра (сбросить всё)</button>');
+  },
+  csave(){
+    const c=C().cfg;
+    c.sb=int('f-csb',1,c.sb);c.bb=int('f-cbb',1,c.bb);c.buyin=int('f-cbuy',1,c.buyin);
+    c.chips=int('f-cchips',1,c.chips);c.maxRe=int('f-cre',0,c.maxRe);c.minutes=int('f-cmin',0,c.minutes);
+    S.cfg.sound=$('f-sound').classList.contains('on');
+    const t=C().t,rem=cDur()-cElapsed();t.w15=cDur()>0&&rem<=15*60000;t.wEnd=cDur()>0&&rem<=0;
+    hap('ok');save();renderAll();closeSheet();toast('Сохранено');
+  },
+  creset(el){
+    if(!el.dataset.sure){el.dataset.sure=1;el.textContent='Нажмите ещё раз для сброса';hap('warn');return;}
+    C().t={acc:0,running:false,since:0,w15:false,wEnd:false};hap('ok');save();wake();renderAll();closeSheet();
+  },
+  cresetall(el){
+    if(!el.dataset.sure){el.dataset.sure=1;el.textContent='Точно? Нажмите ещё раз';hap('warn');return;}
+    C().players=[];C().t={acc:0,running:false,since:0,w15:false,wEnd:false};hap('ok');save();wake();renderAll();closeSheet();toast('Новая игра');
+  },
+  cimport(){
+    S.players.forEach(p=>C().players.push({id:'p'+Date.now()+Math.floor(Math.random()*1e6),name:p.name,buyins:1,left:false,cashout:null}));
+    hap('ok');save();renderAll();toast('Игроки добавлены');
+  },
+  crebuy(el){
+    const p=cfind(el.dataset.id);if(!p)return;const c=C().cfg;
+    if(p.buyins-1>=c.maxRe){toast('Лимит докупок исчерпан');hap('warn');return;}
+    p.buyins++;p.left=false;hap('ok');toast(p.name+': докуп '+(p.buyins-1)+' / '+c.maxRe+' (+'+n(c.chips)+' фишек)');save();renderAll();closeSheet();
+  },
+  cunre(el){const p=cfind(el.dataset.id);if(!p||p.buyins<2)return;p.buyins--;hap('soft');save();renderAll();closeSheet();},
+  cleave(el){
+    const p=cfind(el.dataset.id);if(!p)return;
+    const v=$('f-cout')?$('f-cout').value.replace(/[^\d]/g,''):'';
+    p.left=true;if(v!=='')p.cashout=parseInt(v,10);
+    hap('medium');save();renderAll();closeSheet();toast(p.name+' вышел из игры');
+  },
+  creturn(el){const p=cfind(el.dataset.id);if(!p)return;p.left=false;hap('soft');save();renderAll();closeSheet();},
+  cdel(el){
+    if(!el.dataset.sure){el.dataset.sure=1;el.textContent='Точно удалить? Нажмите ещё раз';hap('warn');return;}
+    C().players=C().players.filter(p=>p.id!==el.dataset.id);hap('medium');save();renderAll();closeSheet();
+  },
+  cplayer(el){
+    const p=cfind(el.dataset.id);if(!p)return;const c=C().cfg,id=p.id,re=p.buyins-1;
+    let h='<h3>'+esc(p.name)+'</h3><p class="lbl" style="margin:-8px 0 16px">Входов: '+p.buyins+' · внёс '+n(p.buyins*c.buyin)+' ₽ · получил '+n(p.buyins*c.chips)+' фишек</p>';
+    if(!p.left){
+      if(re<c.maxRe)h+='<button class="btn pri" data-act="crebuy" data-id="'+id+'">Докуп (+'+n(c.buyin)+' ₽ = '+n(c.chips)+' фишек)</button>';
+      h+='<div class="fld" style="margin-top:14px"><label>Уходит из игры? Сколько фишек забирает</label><input id="f-cout" inputmode="numeric" placeholder="фишки, можно позже" value="'+(p.cashout==null?'':p.cashout)+'"></div>'+
+         '<button class="btn" data-act="cleave" data-id="'+id+'">Вышел из игры</button>';
+    }else h+='<button class="btn pri" data-act="creturn" data-id="'+id+'">Вернуть за стол</button>';
+    if(re>0)h+='<button class="btn" data-act="cunre" data-id="'+id+'">Убрать один докуп</button>';
+    h+='<button class="btn dng" data-act="cdel" data-id="'+id+'">Удалить игрока</button>';
+    openSheet(h);
+  }
+});
+
 /* ---------- события ---------- */
 document.addEventListener('click',e=>{
   const tab=e.target.closest('[data-tab]');
   if(tab){
-    if(tab.classList.contains('on'))return;
-    document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b===tab));
-    document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id==='s-'+tab.dataset.tab));
+    if(tab.dataset.tab===curTab)return;
+    curTab=tab.dataset.tab;showTab();
     hap('sel');
-    if(tab.dataset.tab==='struct'){const c=document.querySelector('#levels .cur');c&&c.scrollIntoView({block:'center'});}
+    if(S.mode==='tour'&&tab.dataset.tab==='struct'){const c=document.querySelector('#levels .cur');c&&c.scrollIntoView({block:'center'});}
     return;
   }
   const el=e.target.closest('[data-act]');
